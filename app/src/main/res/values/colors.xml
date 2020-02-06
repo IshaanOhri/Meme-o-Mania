@@ -24,6 +24,8 @@
     <color name="colorOrange">#FF5000</color>
     <color name="colorGrey">#6D7278</color>
     <color name="colorWhite">#F6F6F6</color>
+    <color name="cardBackground">#F6F6F6</color>
+    <color name="optionText">#787878</color>
 
 
 </resources>

@@ -1,6 +1,9 @@
 package com.adgvit.meme_o_mania;
 
-public class questionObject {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class questionObject implements Parcelable {
 
     private String question;
     private String a1;
@@ -24,6 +27,28 @@ public class questionObject {
     public questionObject(){
 
     }
+
+    protected questionObject(Parcel in) {
+        question = in.readString();
+        a1 = in.readString();
+        a2 = in.readString();
+        a3 = in.readString();
+        a4 = in.readString();
+        correct = in.readInt();
+        img = in.readString();
+    }
+
+    public static final Creator<questionObject> CREATOR = new Creator<questionObject>() {
+        @Override
+        public questionObject createFromParcel(Parcel in) {
+            return new questionObject(in);
+        }
+
+        @Override
+        public questionObject[] newArray(int size) {
+            return new questionObject[size];
+        }
+    };
 
     public String getQuestion() {
         return question;
@@ -51,5 +76,21 @@ public class questionObject {
 
     public String getImg() {
         return img;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(question);
+        parcel.writeString(a1);
+        parcel.writeString(a2);
+        parcel.writeString(a3);
+        parcel.writeString(a4);
+        parcel.writeInt(correct);
+        parcel.writeString(img);
     }
 }

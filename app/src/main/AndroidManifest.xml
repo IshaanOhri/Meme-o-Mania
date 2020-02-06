@@ -3,6 +3,9 @@
     package="com.adgvit.meme_o_mania">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.REORDER_TASKS" />
+
+
 
     <application
         android:allowBackup="true"
@@ -11,12 +14,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Quiz"
+        <activity android:name=".quizRules"
             android:screenOrientation="portrait">
             <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Quiz"
+            android:screenOrientation="portrait">
+            <intent-filter >
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+
             </intent-filter>
         </activity>
         <activity android:name=".ForgotPasswordActivity" />
@@ -28,9 +42,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".LoginActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait" />
     </application>
+
 
 </manifest>

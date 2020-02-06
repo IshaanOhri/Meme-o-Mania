@@ -54,4 +54,7 @@ dependencies {
 
     implementation 'com.firebaseui:firebase-ui-storage:4.3.1'
 
+    implementation 'com.wang.avi:library:2.1.3'
+
+
 }
