@@ -1,10 +1,16 @@
 package com.adgvit.meme_o_mania;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,9 +19,12 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import java.lang.reflect.Type;
+
 public class NavigationActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
+    public static String name, regNo,email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +32,18 @@ public class NavigationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_navigation);
 
         bottomNavigationView = findViewById(R.id.nav_view);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("com.adgvit.meme_o_mania", Context.MODE_PRIVATE);
+
+        Gson gson = new Gson();
+        Type type = new TypeToken<String>(){}.getType();
+
+        String json = sharedPreferences.getString("name","Name");
+        name = gson.fromJson(json,type);
+        json = sharedPreferences.getString("regNo","Reg.No.");
+        regNo = gson.fromJson(json,type);
+        json = sharedPreferences.getString("email","Email");
+        email = gson.fromJson(json,type);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,new TimelineFragment()).commit();
 
@@ -42,7 +63,7 @@ public class NavigationActivity extends AppCompatActivity {
                         break;
 
                     case R.id.navigation_meme:
-                        selectedFragment = new UploadFragment();
+                        selectedFragment = new UploadRulesFragment();
                         break;
 
                     case R.id.navigation_about:
@@ -59,4 +80,23 @@ public class NavigationActivity extends AppCompatActivity {
         });
     }
 
+    boolean doubleBackToExitPressedOnce = false;
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+    }
 }

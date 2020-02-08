@@ -7,13 +7,23 @@
         <item name="android:fontFamily">@font/proxima_nova_regular</item>
         <item name="materialButtonStyle">@style/Button</item>
     </style>
+
     <style name="Button" parent="Widget.MaterialComponents.Button">
         <item name="android:background">@drawable/background_button</item>
         <item name="android:backgroundTint">@color/colorButton</item>
-        <item name="android:height">75dp</item>
-        <item name="cornerRadius">20dp</item>
+        <item name="android:height">65dp</item>
+        <item name="cornerRadius">15dp</item>
         <item name="android:textColor">@color/colorButtonText</item>
         <item name="android:fontFamily">@font/proxima_nova_regular</item>
         <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="Button2" parent="Widget.MaterialComponents.Button">
+        <item name="android:backgroundTint">@color/buttonColor2</item>
+        <item name="android:height">60dp</item>
+        <item name="cornerRadius">5dp</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:fontFamily">@font/proxima_nova_regular</item>
+        <item name="android:textSize">14sp</item>
     </style>
 </resources>

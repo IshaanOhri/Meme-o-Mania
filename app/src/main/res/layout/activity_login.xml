@@ -46,7 +46,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/forgotForgotTextView"
-        android:padding="10dp"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="20dp"
         android:hint="@string/emailLoginEditText"
         android:background="@drawable/background_edit_text"
         android:backgroundTint="@color/colorEditText"
@@ -67,7 +68,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailForgotEditText"
-        android:padding="10dp"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="20dp"
         android:hint="@string/passwordLoginEditText"
         android:background="@drawable/background_edit_text"
         android:backgroundTint="@color/colorEditText"
@@ -77,6 +79,7 @@
         />
 
     <Button
+        style="@style/Button"
         android:id="@+id/loginLoginButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -84,6 +87,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
         android:text="@string/loginLoginButton"
+        android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/forgotLoginTextView" />
@@ -128,6 +132,7 @@
             android:layout_weight="1"
             android:textStyle="bold"
             android:textSize="16sp"
+            android:layout_marginLeft="2dp"
             android:textColor="@color/colorTextViewOrange"
             android:text="@string/signupLoginTextView2" />
     </LinearLayout>

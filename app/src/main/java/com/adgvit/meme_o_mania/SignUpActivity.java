@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.method.SingleLineTransformationMethod;
 import android.util.Log;
 import android.view.View;
@@ -70,7 +71,8 @@ public class SignUpActivity extends AppCompatActivity {
                                                     myref.child("Name").setValue(nameSignUp.getText().toString());
                                                     myref.child("RegNo").setValue(regnoSignUp.getText().toString().trim());
 
-                                                    Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                                                    Intent intent = new Intent(SignUpActivity.this, ConfirmSignUp.class);
+                                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                     startActivity(intent);
                                                 }
                                                 catch (Exception e)
@@ -101,6 +103,7 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(SignUpActivity.this,LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });
@@ -160,5 +163,24 @@ public class SignUpActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+    boolean doubleBackToExitPressedOnce = false;
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 }

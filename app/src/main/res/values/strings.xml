@@ -34,7 +34,7 @@
     <!--Navigation Activity-->
     <string name="timelineHeading">TIMELINE</string>
     <string name="quizHeading">QUIZ</string>
-    <string name="memeHeading">UPLOAD</string>
+    <string name="upload">UPLOAD</string>
     <string name="aboutHeading">INFORMATION</string>
 
     <!--Navigation Quiz Fragment-->
@@ -51,7 +51,30 @@
     <string name="quizRules">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</string>
     <string name="rulesSample">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--About Us-->
+    <string name="AboutUs">ABOUT US</string>
+    <string name="todo">TODO</string>
+    <string name="ADG">Apple Developers Group</string>
+    <string name="VV">VIT VELLORE</string>
+    <string name="audesc">Apple Developers Group (ADG) is a name synonymous with excellence, simplicity and dedication. It is a registered student community at VIT, Vellore established under the Apple University program. A coterie of talented minds seeking not just success but perfection. The mentors and the members here, join hands in successfully pulling off a hack-a-thon such as Hackgrid and engaging workshops like iOS Fusion and Unidev. Hackgrid encourages young developers to come up with scintillating technical solutions to real world problems. iOS Fusion aims at giving a hands on experience of iOS app development to all the tech enthusiasts whereas Unidev takes future developers into realm of augmented reality</string>
+    <string name="OurApps">Our Apps</string>
+    <string name="OurEvents">Our Events</string>
+    <string name="Iosf">Ios Fusion</string>
+    <string name="unidev">Unidev</string>
+    <string name="hackgrid">Hackgrid</string>
+    <string name="name">NAME</string>
+    <string name="email">Email</string>
+    <string name="regNo">Reg. No.</string>
+    <string name="logout">Logout</string>
+
+    <!--Meme Upload-->
+    <string name="uploadRulesButton">Upload Meme</string>
+    <string name="uploadMeme">Upload your memes</string>
+    <string name="uploaded">Uploaded</string>
+    <string name="done">Done</string>
+    <string name="uploadRules">Round 1: Quiz based on memes\nRound 2: Making memes\nRound 3: Challenge round\nNote:- Selected memes will be uploaded on our facebook page and the one with most number of likes and less time to compete the challenge will WIN!\n\nQuiz Rules:\n1. Only single attempt allowed.\n2. Clear the preset cutoff to qualify to the next round.\n3. No means of cheating will be allowed during the quiz or while performing the tasks.\n\n\nMemes Uploading Rules\n1. Defaming VIT, profanity, instigating people will not be allowed. If found you will be disqualified.\n2. Memes using provided templates will only be allowed.</string>
+
+    <!--Confirm Sign Up-->
+    <string name="confirm">Congratulations!\nYour account is verified.</string>
 
 </resources>

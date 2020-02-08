@@ -1,6 +1,8 @@
 package com.adgvit.meme_o_mania;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,16 +14,23 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TabHost;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class AboutUsFragment extends Fragment {
 
     private TabHost tabHost;
+    private TextView nameTextView, regNoTextView, emailTextView;
+    private Button logoutButton;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -30,6 +39,27 @@ public class AboutUsFragment extends Fragment {
 
         tabHost = view.findViewById(R.id.tabHost);
         tabHost.setup();
+
+        nameTextView = view.findViewById(R.id.nameTextView);
+        regNoTextView = view.findViewById(R.id.regNoTextView);
+        emailTextView = view.findViewById(R.id.emailTextView);
+        logoutButton = view.findViewById(R.id.logoutButton);
+
+        nameTextView.setText(NavigationActivity.name);
+        regNoTextView.setText(NavigationActivity.regNo);
+        emailTextView.setText(NavigationActivity.email);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                firebaseAuth.signOut();
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
 
         TabHost.TabSpec spec = tabHost.newTabSpec("TAB ONE");
         spec.setContent(R.id.tab1);

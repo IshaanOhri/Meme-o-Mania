@@ -8,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -228,7 +229,6 @@ public class Quiz extends AppCompatActivity {
         storage = FirebaseStorage.getInstance().getReference();
 
         loadNewQuestion(questionNo);
-
 
         cl1.setOnClickListener(new View.OnClickListener() {
             @Override
