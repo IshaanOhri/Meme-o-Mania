@@ -72,9 +72,23 @@
     <string name="uploadMeme">Upload your memes</string>
     <string name="uploaded">Uploaded</string>
     <string name="done">Done</string>
-    <string name="uploadRules">Round 1: Quiz based on memes\nRound 2: Making memes\nRound 3: Challenge round\nNote:- Selected memes will be uploaded on our facebook page and the one with most number of likes and less time to compete the challenge will WIN!\n\nQuiz Rules:\n1. Only single attempt allowed.\n2. Clear the preset cutoff to qualify to the next round.\n3. No means of cheating will be allowed during the quiz or while performing the tasks.\n\n\nMemes Uploading Rules\n1. Defaming VIT, profanity, instigating people will not be allowed. If found you will be disqualified.\n2. Memes using provided templates will only be allowed.</string>
+    <string name="uploadRules">Memes Uploading Rules\n1. Defaming VIT, profanity, instigating people will not be allowed. If found you will be disqualified.\n2. Memes using provided templates will only be allowed.</string>
 
     <!--Confirm Sign Up-->
     <string name="confirm">Congratulations!\nYour account is verified.</string>
+
+
+    <string name="aquizHeading">QUIZ</string>
+    <string name="atime">30</string>
+    <string name="aunit">s</string>
+    <string name="aquestion">This meme started out as:</string>
+    <string name="aquestionNo">QUESTION 1.</string>
+    <string name="option1">A Snap</string>
+    <string name="option2">Skype Call</string>
+    <string name="option3">A Youtube Video</string>
+    <string name="option4">Twitter Post</string>
+    <string name="arules">Rules</string>
+    <string name="rulesQuiz">Quiz Rules:\n1. Only single attempt allowed.\n2. Clear the preset cutoff to qualify to the next round.\n3. No means of cheating will be allowed during the quiz or while performing the tasks.\n\n\n</string>
+
 
 </resources>

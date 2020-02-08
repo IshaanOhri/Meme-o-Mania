@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
@@ -26,12 +27,16 @@ public class AboutUsFragment extends Fragment {
     private TextView nameTextView, regNoTextView, emailTextView;
     private Button logoutButton;
     private FirebaseAuth firebaseAuth;
+    private ImageView imtap, impap;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }
+
+    String papvit = "https://play.google.com/store/apps/details?id=com.namankhurpia.paper";
+    String tapvit = "https://play.google.com/store/apps/details?id=patel.abhay.adg_tap_app";
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -48,6 +53,9 @@ public class AboutUsFragment extends Fragment {
         nameTextView.setText(NavigationActivity.name);
         regNoTextView.setText(NavigationActivity.regNo);
         emailTextView.setText(NavigationActivity.email);
+
+        imtap =view.findViewById(R.id.imtap);
+        impap = view.findViewById(R.id.impap);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -101,6 +109,23 @@ public class AboutUsFragment extends Fragment {
                 TextView tv = tabHost.getTabWidget().getChildAt(tab).findViewById(android.R.id.title);
                 tv.setTextColor(Color.BLACK);
                 tv.setTextSize(14);
+            }
+        });
+
+        imtap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData((Uri.parse(tapvit)));
+                startActivity(intent);
+            }
+        });
+        impap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData((Uri.parse(papvit)));
+                startActivity(intent);
             }
         });
 

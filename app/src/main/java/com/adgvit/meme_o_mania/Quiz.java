@@ -4,18 +4,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
 
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -39,6 +39,7 @@ public class Quiz extends AppCompatActivity {
     private StorageReference storage,storageRef;
     private ArrayList<questionObject> questionsList = new ArrayList<>();
     private AVLoadingIndicatorView avi;
+    private boolean quizAttempted = false;
 
 
     void setCountDownTimer()
@@ -97,10 +98,20 @@ public class Quiz extends AppCompatActivity {
                         .load(uri)
                         .into(memeImageView);
 
+//                Drawable drawable;
+//
+//                do{
+//                    drawable = memeImageView.getDrawable();
+//                    Log.i("INFO",""+drawable);
+//                }while(drawable == null);
+
                 setCountDownTimer();
                 reset();
                 setNewQuestion(questionNo);
                 showUi();
+
+
+
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -108,6 +119,7 @@ public class Quiz extends AppCompatActivity {
             public void onFailure(@NonNull Exception e) {
             }
         });
+
     }
 
     void setNewQuestion(int i)
@@ -153,11 +165,31 @@ public class Quiz extends AppCompatActivity {
     }
     void endQuiz()
     {
-        Toast.makeText(this, "Quiz ended with score "+ score, Toast.LENGTH_SHORT).show();
-        cl1.setEnabled(false);
-        cl2.setEnabled(false);
-        cl3.setEnabled(false);
-        cl4.setEnabled(false);
+        quizAttempted = true;
+        SharedPreferences sharedPref = getSharedPreferences("attempt", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean("quizAttempted",quizAttempted);
+        editor.apply();
+
+        hideUi();
+
+        Handler handler = new Handler();
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                avi.smoothToHide();
+            }
+        }, 500);
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Fragment fragment = new ResultFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.resultFrameLayout,fragment).commit();
+            }
+        }, 1000);
+
     }
     void hideUi()
     {
@@ -196,6 +228,10 @@ public class Quiz extends AppCompatActivity {
         cl4.setEnabled(true);
         avi.smoothToHide();
     }
+    public int getScore()
+    {
+        return score;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -230,13 +266,21 @@ public class Quiz extends AppCompatActivity {
 
         loadNewQuestion(questionNo);
 
+        final Handler handler = new Handler();
+
         cl1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 cl1.setBackgroundColor(getColor(R.color.colorOrange));
                 answer1.setTextColor(getColor(R.color.colorWhite));
-                checkSubmission(1,questionNo);
-                countDownTimer.cancel();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        checkSubmission(1,questionNo);
+                        countDownTimer.cancel();
+                    }
+                }, 200);
             }
         });
         cl2.setOnClickListener(new View.OnClickListener() {
@@ -244,8 +288,13 @@ public class Quiz extends AppCompatActivity {
             public void onClick(View view) {
                 cl2.setBackgroundColor(getColor(R.color.colorOrange));
                 answer2.setTextColor(getColor(R.color.colorWhite));
-                checkSubmission(2,questionNo);
-                countDownTimer.cancel();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        checkSubmission(2,questionNo);
+                        countDownTimer.cancel();
+                    }
+                }, 200);
             }
         });
         cl3.setOnClickListener(new View.OnClickListener() {
@@ -253,8 +302,13 @@ public class Quiz extends AppCompatActivity {
             public void onClick(View view) {
                 cl3.setBackgroundColor(getColor(R.color.colorOrange));
                 answer3.setTextColor(getColor(R.color.colorWhite));
-                checkSubmission(3,questionNo);
-                countDownTimer.cancel();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        checkSubmission(3,questionNo);
+                        countDownTimer.cancel();
+                    }
+                }, 200);
             }
         });
         cl4.setOnClickListener(new View.OnClickListener() {
@@ -262,8 +316,13 @@ public class Quiz extends AppCompatActivity {
             public void onClick(View view) {
                 cl4.setBackgroundColor(getColor(R.color.colorOrange));
                 answer4.setTextColor(getColor(R.color.colorWhite));
-                checkSubmission(4,questionNo);
-                countDownTimer.cancel();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        checkSubmission(4,questionNo);
+                        countDownTimer.cancel();
+                    }
+                }, 200);
             }
         });
 
@@ -271,16 +330,6 @@ public class Quiz extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         // super.onBackPressed();
-        Toast.makeText(getApplicationContext(), "Back press disabled!", Toast.LENGTH_SHORT).show();
     }
-    @Override
-    protected void onPause() {
-        super.onPause();
 
-        ActivityManager activityManager = (ActivityManager) getApplicationContext()
-                .getSystemService(Context.ACTIVITY_SERVICE);
-
-        activityManager.moveTaskToFront(getTaskId(), 0);
-
-    }
 }
