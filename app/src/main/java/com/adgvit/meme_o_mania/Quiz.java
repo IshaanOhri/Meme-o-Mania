@@ -204,6 +204,22 @@ public class Quiz extends AppCompatActivity {
         }, 1000);
 
     }
+
+    void cheating()
+    {
+
+        DatabaseReference myref2 = FirebaseDatabase.getInstance().getReference().child("marks").child(NavigationActivity.email.replace('.','_'));
+
+        myref2.setValue(score);
+
+        hideUi();
+
+        avi.smoothToHide();
+
+        Fragment fragment = new ResultFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.resultFrameLayout,fragment).commit();
+    }
+
     void hideUi()
     {
         heading.setVisibility(View.INVISIBLE);
@@ -348,6 +364,6 @@ public class Quiz extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        endQuiz();
+        cheating();
     }
 }
