@@ -83,7 +83,7 @@ public class Quiz extends AppCompatActivity {
 
         hideUi();
 
-        if(questionsList.get(questionNo).getImg().equals("noimg") )
+        if(questionsList.get(questionNo).getImg().equals("null") )
         {
             memeImageView.setVisibility(View.GONE);
             setCountDownTimer();
@@ -345,4 +345,9 @@ public class Quiz extends AppCompatActivity {
         // super.onBackPressed();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        endQuiz();
+    }
 }

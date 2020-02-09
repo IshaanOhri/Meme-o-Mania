@@ -68,6 +68,7 @@
     <string name="regNo">Reg. No.</string>
     <string name="logout">Logout</string>
     <string name="privacyPolicy">Privacy Policy</string>
+    <string name="contactUs">Contact Us</string>
 
     <!--Meme Upload-->
     <string name="uploadRulesButton">Upload Meme</string>
