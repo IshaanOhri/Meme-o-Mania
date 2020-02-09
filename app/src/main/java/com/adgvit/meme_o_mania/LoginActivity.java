@@ -3,10 +3,15 @@ package com.adgvit.meme_o_mania;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -17,6 +22,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginButton;
     private LinearLayout signupLayout;
     private TextView forgotTextView;
-
+    private String temp;
     public static FirebaseAuth firebaseAuth;
 
     @Override
@@ -61,6 +72,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
+                InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                View view = getCurrentFocus();
+                if (view == null) {
+                    view = new View(getApplicationContext());
+                }
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
                 if(checkEmpty()){
                     if(checkMail()){
                         firebaseAuth.signInWithEmailAndPassword(emailLogin.getText().toString().trim(), passwordLogin.getText().toString())
@@ -70,8 +88,64 @@ public class LoginActivity extends AppCompatActivity {
                                     {
                                         if(task.isSuccessful())
                                         {
+                                            final SharedPreferences sharedPref = getSharedPreferences("com.adgvit.meme_o_mania", Context.MODE_PRIVATE);
+                                            String userEmail = (emailLogin.getText()).toString().trim();
+                                            final String tempEmail = userEmail.replace('.', '_');
+
+                                            final Gson gson = new Gson();
+                                            final String[] json = {gson.toJson(userEmail)};
+                                            sharedPref.edit().putString("email", json[0]).apply();
+
+                                            DatabaseReference tempRef= FirebaseDatabase.getInstance().getReference().child("users").child(tempEmail);
+                                            tempRef.addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
+                                                    for (final DataSnapshot ds : dataSnapshot.getChildren()) {
+                                                        String Values = ds.getKey();
+                                                        assert Values != null;
+                                                        if ("Name".equalsIgnoreCase(Values)) {
+                                                            temp = ds.getValue().toString();
+                                                            Log.i("INFO_1","Name:"+ temp);
+
+                                                            json[0] = gson.toJson(temp);
+                                                            sharedPref.edit().putString("name", json[0]).apply();
+                                                        } else if ("RegNo".equalsIgnoreCase(Values)) {
+                                                            temp = ds.getValue().toString();
+                                                            Log.i("INFO_1","RegNo:"+ temp);
+
+                                                            json[0] = gson.toJson(temp);
+                                                            sharedPref.edit().putString("regNo", temp).apply();
+                                                        }
+                                                        else if ("Count".equalsIgnoreCase(Values)) {
+                                                            temp = ds.getValue().toString();
+                                                            Log.i("INFO_1","Count:"+ temp);
+
+                                                            json[0] = gson.toJson(temp);
+                                                            sharedPref.edit().putInt("count",Integer.parseInt(temp)).apply();
+                                                        }
+                                                        else if("Upload".equalsIgnoreCase(Values)){
+                                                            temp = ds.getValue().toString();
+                                                            Log.i("INFO_1","Upload:"+ temp);
+
+                                                            json[0] = gson.toJson(temp);
+                                                            sharedPref.edit().putInt("uploadCheck",Integer.parseInt(temp)).apply();
+                                                        }
+                                                    }
+
+                                                }
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                }
+                                            });
+
                                             Intent intent=new Intent(LoginActivity.this,NavigationActivity.class);
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                             startActivity(intent);
+
                                         }
                                         else{
                                             Toast.makeText(LoginActivity.this, "Log In Failed", Toast.LENGTH_SHORT).show();
@@ -101,7 +175,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(LoginActivity.this,ForgotPasswordActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });

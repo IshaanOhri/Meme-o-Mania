@@ -9,26 +9,28 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/alertBackground"
         android:padding="20dp">
 
         <ImageView
             android:id="@+id/gifImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/done"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/no"
+            android:layout_margin="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/doneButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/proxima_nova_regular"
-            android:text="@string/uploaded"
-            android:textColor="@color/colorWhite"
+            android:text="@string/noQuiz"
+            android:textColor="@color/colorBlack"
             android:textSize="30dp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -38,8 +40,10 @@
             style="@style/Button2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/done"
+            android:text="@string/ok"
             android:textAllCaps="false"
+            android:backgroundTint="@color/buttonColor2"
+            android:textColor="@color/colorWhite"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

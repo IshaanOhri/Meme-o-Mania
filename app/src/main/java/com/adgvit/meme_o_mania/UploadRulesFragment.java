@@ -1,5 +1,6 @@
 package com.adgvit.meme_o_mania;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,7 +14,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 public class UploadRulesFragment extends Fragment {
 
@@ -34,7 +38,31 @@ public class UploadRulesFragment extends Fragment {
         uploadMemeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,new UploadFragment()).commit();
+                if(NavigationActivity.quizCheck != 1)
+                {
+                    final Dialog dialog1 = new Dialog(getActivity());
+                    dialog1.setCancelable(false);
+                    dialog1.setContentView(R.layout.quiz_alert);
+                    dialog1.show();
+
+                    ImageView gifImageView = dialog1.findViewById(R.id.gifImageView);
+
+                    Glide.with(getContext())
+                            .load(R.drawable.no)
+                            .into(gifImageView);
+
+                    Button doneButton = dialog1.findViewById(R.id.doneButton);
+
+                    doneButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog1.dismiss();
+                        }
+                    });
+                }
+                else {
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new UploadFragment()).commit();
+                }
             }
         });
 

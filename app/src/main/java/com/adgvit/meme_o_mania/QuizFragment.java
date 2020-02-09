@@ -1,5 +1,6 @@
 package com.adgvit.meme_o_mania;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,14 +15,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.wang.avi.AVLoadingIndicatorView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -53,7 +59,29 @@ public class QuizFragment extends Fragment {
 
                 if(quizAttempted){
 
-                    Toast.makeText(getActivity(), "Quiz already Attempted", Toast.LENGTH_SHORT).show();
+                    final Dialog dialog1 = new Dialog(getActivity());
+                    dialog1.setCancelable(false);
+                    dialog1.setContentView(R.layout.quiz_alert);
+                    dialog1.show();
+
+                    ImageView gifImageView = dialog1.findViewById(R.id.gifImageView);
+
+                    Glide.with(getContext())
+                            .load(R.drawable.no)
+                            .into(gifImageView);
+
+                    TextView message = dialog1.findViewById(R.id.textView3);
+
+                    message.setText(R.string.noReQuiz);
+
+                    Button doneButton = dialog1.findViewById(R.id.doneButton);
+
+                    doneButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog1.dismiss();
+                        }
+                    });
 
                 }else {
                     startQuizButton.setEnabled(false);

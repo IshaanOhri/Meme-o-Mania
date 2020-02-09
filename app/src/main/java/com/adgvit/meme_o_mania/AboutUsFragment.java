@@ -63,6 +63,9 @@ public class AboutUsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 firebaseAuth.signOut();
+
+                NavigationActivity.sharedPreferences.edit().clear().apply();
+
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);

@@ -41,6 +41,7 @@
     <string name="rulesQuizTextView">Rules:</string>
     <string name="pointQuizTextView">Points \n1.hi wasssup\n2.Heyyy</string>
     <string name="startQuizButton">Start Quiz</string>
+    <string name="noReQuiz">Not Allowed\nQuiz already attempted</string>
 
     <!--Navigation Meme Fragment-->
     <string name="rulesMemeTextView">Rules:</string>
@@ -66,12 +67,16 @@
     <string name="email">Email</string>
     <string name="regNo">Reg. No.</string>
     <string name="logout">Logout</string>
+    <string name="privacyPolicy">Privacy Policy</string>
 
     <!--Meme Upload-->
     <string name="uploadRulesButton">Upload Meme</string>
     <string name="uploadMeme">Upload your memes</string>
     <string name="uploaded">Uploaded</string>
     <string name="done">Done</string>
+    <string name="ok">Okay</string>
+    <string name="noQuiz">Not Allowed\nAttempt quiz first</string>
+    <string name="success">Your meme has been successfully uploaded!</string>
     <string name="uploadRules">Memes Uploading Rules\n1. Defaming VIT, profanity, instigating people will not be allowed. If found you will be disqualified.\n2. Memes using provided templates will only be allowed.</string>
 
     <!--Confirm Sign Up-->

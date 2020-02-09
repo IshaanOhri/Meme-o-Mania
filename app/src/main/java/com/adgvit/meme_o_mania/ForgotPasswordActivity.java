@@ -3,9 +3,11 @@ package com.adgvit.meme_o_mania;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -36,6 +38,13 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         resetForgotButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                View view = getCurrentFocus();
+                if (view == null) {
+                    view = new View(getApplicationContext());
+                }
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
                 if(checkEmpty())
                 {
                     if(checkMail())

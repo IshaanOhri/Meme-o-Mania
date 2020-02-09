@@ -3,12 +3,14 @@ package com.adgvit.meme_o_mania;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.method.SingleLineTransformationMethod;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -55,6 +57,13 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
+                InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                View view = getCurrentFocus();
+                if (view == null) {
+                    view = new View(getApplicationContext());
+                }
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
                 if(checkEmpty())
                 {
                     if(checkReg()) {
@@ -70,6 +79,8 @@ public class SignUpActivity extends AppCompatActivity {
                                                     DatabaseReference myref=database.getReference().child("users").child(emailSignUp.getText().toString().trim().replace('.','_'));
                                                     myref.child("Name").setValue(nameSignUp.getText().toString());
                                                     myref.child("RegNo").setValue(regnoSignUp.getText().toString().trim());
+                                                    myref.child("Count").setValue(0);
+                                                    myref.child("Upload").setValue(0);
 
                                                     Intent intent = new Intent(SignUpActivity.this, ConfirmSignUp.class);
                                                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -164,6 +175,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
         return true;
     }
+
     boolean doubleBackToExitPressedOnce = false;
     @Override
     public void onBackPressed() {

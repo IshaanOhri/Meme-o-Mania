@@ -53,7 +53,7 @@
                         android:id="@android:id/tabcontent"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:paddingHorizontal="10dp">
+                        android:layout_marginHorizontal="20dp">
 
                         <LinearLayout
                             android:id="@+id/tab1"
@@ -78,9 +78,7 @@
                                         android:id="@+id/AboutCard0"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginStart="15dp"
                                         android:layout_marginTop="20dp"
-                                        android:layout_marginEnd="15dp"
                                         app:cardCornerRadius="12dp"
                                         app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintStart_toStartOf="parent"
@@ -101,7 +99,7 @@
                                                 android:paddingVertical="5dp"
                                                 android:text="@string/name"
                                                 android:textColor="@color/colorOrange"
-                                                android:textSize="25dp"
+                                                android:textSize="20dp"
                                                 app:layout_constraintStart_toStartOf="parent"
                                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -114,7 +112,7 @@
                                                 android:paddingVertical="5dp"
                                                 android:text="@string/regNo"
                                                 android:textColor="@color/colorGrey"
-                                                android:textSize="25dp"
+                                                android:textSize="20dp"
                                                 app:layout_constraintStart_toStartOf="parent"
                                                 app:layout_constraintTop_toBottomOf="@+id/nameTextView" />
 
@@ -127,7 +125,7 @@
                                                 android:paddingVertical="5dp"
                                                 android:text="@string/email"
                                                 android:textColor="@color/colorGrey"
-                                                android:textSize="25dp"
+                                                android:textSize="20dp"
                                                 app:layout_constraintStart_toStartOf="parent"
                                                 app:layout_constraintTop_toBottomOf="@+id/regNoTextView" />
 
@@ -139,11 +137,7 @@
                                         android:id="@+id/AboutCard1"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginStart="15dp"
-                                        android:layout_marginLeft="15dp"
                                         android:layout_marginTop="20dp"
-                                        android:layout_marginEnd="15dp"
-                                        android:layout_marginRight="15dp"
                                         app:cardCornerRadius="12dp"
                                         app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintStart_toStartOf="parent"
@@ -222,11 +216,7 @@
                                         android:id="@+id/AboutCard2"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginStart="15dp"
-                                        android:layout_marginLeft="15dp"
                                         android:layout_marginTop="20dp"
-                                        android:layout_marginEnd="15dp"
-                                        android:layout_marginRight="15dp"
                                         app:cardCornerRadius="12dp"
                                         app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintStart_toStartOf="parent"
@@ -286,11 +276,7 @@
                                         android:id="@+id/AboutCard3"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginStart="15dp"
-                                        android:layout_marginLeft="15dp"
                                         android:layout_marginTop="20dp"
-                                        android:layout_marginEnd="15dp"
-                                        android:layout_marginRight="15dp"
                                         android:layout_marginBottom="10dp"
                                         app:cardCornerRadius="12dp"
                                         app:layout_constraintBottom_toBottomOf="parent"
@@ -464,6 +450,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
                                 android:src="@drawable/supreeth"/>
 
                         </LinearLayout>
@@ -480,11 +467,49 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/logout"
-                android:layout_margin="20dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="30dp"
                 android:textAllCaps="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tabHost"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/privacyPolicy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/logoutButton">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#EEEEEF"
+                    android:paddingVertical="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/proxima_nova_regular"
+                        android:paddingHorizontal="15dp"
+                        android:paddingVertical="5dp"
+                        android:text="@string/privacyPolicy"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorOrange"
+                        android:textSize="14dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

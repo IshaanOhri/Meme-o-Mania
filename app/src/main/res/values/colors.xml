@@ -29,5 +29,6 @@
     <color name="colorGreen">#6DD400</color>
 
     <color name="buttonColor2">#BEBBC6</color>
+    <color name="alertBackground">#8BC540</color>
 
 </resources>

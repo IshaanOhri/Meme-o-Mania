@@ -11,11 +11,13 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ConfirmSignUp extends AppCompatActivity {
 
     private ImageView confirmGIF;
     private Button continueButton;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,8 @@ public class ConfirmSignUp extends AppCompatActivity {
         confirmGIF = findViewById(R.id.confirmGIF);
         continueButton = findViewById(R.id.continueButton);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
         Glide
                 .with(ConfirmSignUp.this)
                 .load(R.drawable.verified)
@@ -33,7 +37,8 @@ public class ConfirmSignUp extends AppCompatActivity {
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ConfirmSignUp.this, NavigationActivity.class);
+                firebaseAuth.signOut();
+                Intent intent = new Intent(ConfirmSignUp.this, LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
