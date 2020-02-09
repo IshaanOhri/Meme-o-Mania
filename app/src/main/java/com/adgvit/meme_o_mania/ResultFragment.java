@@ -13,7 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 
 public class ResultFragment extends Fragment {
@@ -31,10 +34,15 @@ public class ResultFragment extends Fragment {
 
         TextView scoreTextView = view.findViewById(R.id.scoreTextView);
         Button continueButton = view.findViewById(R.id.continueButton);
+        ImageView congratsImageView = view.findViewById(R.id.congratsImageView);
+
+        Glide.with(getContext())
+                .load(R.drawable.congrats)
+                .into(congratsImageView);
 
         int s = ((Quiz)this.getActivity()).getScore();
 
-        String score = s + "/3" + " Score";
+        String score = s + "/10" + " Score";
         scoreTextView.setText(score);
 
         continueButton.setOnClickListener(new View.OnClickListener() {

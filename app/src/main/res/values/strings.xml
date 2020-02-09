@@ -93,7 +93,7 @@
     <string name="option3">A Youtube Video</string>
     <string name="option4">Twitter Post</string>
     <string name="arules">Rules</string>
-    <string name="rulesQuiz">Quiz Rules:\n1. Only single attempt allowed.\n2. Clear the preset cutoff to qualify to the next round.\n3. No means of cheating will be allowed during the quiz or while performing the tasks.\n\n\n</string>
+    <string name="rulesQuiz">Quiz Rules:\n1. Only single attempt allowed.\n2. Clear the preset cutoff to qualify to the next round.\n3. No means of cheating will be allowed during the quiz or while performing the tasks.\n4. Do not close the app once the quiz has begun.\n\n\n</string>
 
 
 </resources>

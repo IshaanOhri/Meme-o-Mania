@@ -30,11 +30,13 @@ import com.wang.avi.AVLoadingIndicatorView;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class QuizFragment extends Fragment {
 
     private ArrayList<questionObject> questionsList = new ArrayList<>();
     private questionObject currentQues;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,18 +48,20 @@ public class QuizFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        final int sNo = new Random().nextInt(4) + 1;
+
         final Button startQuizButton  = view.findViewById(R.id.startQuizButton);
-        final DatabaseReference dataBase = FirebaseDatabase.getInstance().getReference("test_questions");
+        final DatabaseReference dataBase = FirebaseDatabase.getInstance().getReference("questions").child(Integer.toString(1));
         final AVLoadingIndicatorView progressRing = view.findViewById(R.id.progressRing);
 
-        SharedPreferences sharedPref = this.getActivity().getSharedPreferences("attempt", Context.MODE_PRIVATE);
-        final boolean quizAttempted = sharedPref.getBoolean("quizAttempted",false);
+        SharedPreferences sharedPref = this.getActivity().getSharedPreferences("com.adgvit.meme_o_mania", Context.MODE_PRIVATE);
+        final int count = sharedPref.getInt("count",0);
 
         startQuizButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(quizAttempted){
+                if(count == 1){
 
                     final Dialog dialog1 = new Dialog(getActivity());
                     dialog1.setCancelable(false);
@@ -100,6 +104,17 @@ public class QuizFragment extends Fragment {
 
                                 currentQues = itemSnapShot.getValue(questionObject.class);
                                 questionsList.add(currentQues);
+
+                                int count = 1;
+                                SharedPreferences sharedPref = getActivity().getSharedPreferences("com.adgvit.meme_o_mania", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPref.edit();
+                                editor.putInt("count",count);
+                                editor.apply();
+
+                                DatabaseReference myref = FirebaseDatabase.getInstance().getReference().child("users").child(NavigationActivity.email.replace('.','_'));
+
+                                myref.child("Count").setValue(1);
+
 
                                 progressRing.smoothToHide();
                                 Intent intent = new Intent(getActivity(), Quiz.class);

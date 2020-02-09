@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:text="@string/ok"
             android:textAllCaps="false"
-            android:backgroundTint="@color/buttonColor2"
+            android:backgroundTint="@color/colorOrange"
             android:textColor="@color/colorWhite"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

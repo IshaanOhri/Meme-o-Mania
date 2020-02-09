@@ -20,6 +20,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.wang.avi.AVLoadingIndicatorView;
@@ -35,11 +37,10 @@ public class Quiz extends AppCompatActivity {
     private ConstraintLayout cl1, cl2, cl3, cl4;
     private CountDownTimer countDownTimer;
     private long quizTime = 30900;
-    private int score = 0, questionNo = 0, maxQuestions = 3;
+    private int score = 0, questionNo = 0, maxQuestions = 10;
     private StorageReference storage,storageRef;
     private ArrayList<questionObject> questionsList = new ArrayList<>();
     private AVLoadingIndicatorView avi;
-    private boolean quizAttempted = false;
 
 
     void setCountDownTimer()
@@ -81,7 +82,20 @@ public class Quiz extends AppCompatActivity {
     void loadNewQuestion(int questionNo){
 
         hideUi();
-        getMeme(questionsList.get(questionNo).getImg());
+
+        if(questionsList.get(questionNo).getImg().equals("noimg") )
+        {
+            memeImageView.setVisibility(View.GONE);
+            setCountDownTimer();
+            reset();
+            setNewQuestion(questionNo);
+            showUi();
+
+        }else {
+
+            getMeme(questionsList.get(questionNo).getImg());
+
+        }
 
 
 
@@ -165,11 +179,10 @@ public class Quiz extends AppCompatActivity {
     }
     void endQuiz()
     {
-        quizAttempted = true;
-        SharedPreferences sharedPref = getSharedPreferences("attempt", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putBoolean("quizAttempted",quizAttempted);
-        editor.apply();
+
+        DatabaseReference myref2 = FirebaseDatabase.getInstance().getReference().child("marks").child(NavigationActivity.email.replace('.','_'));
+
+        myref2.setValue(score);
 
         hideUi();
 

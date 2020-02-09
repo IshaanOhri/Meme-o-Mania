@@ -28,7 +28,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -57,6 +59,66 @@ public class LoginActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         if (firebaseAuth.getCurrentUser()!=null)
         {
+            {
+                final SharedPreferences sharedPref = getSharedPreferences("com.adgvit.meme_o_mania", Context.MODE_PRIVATE);
+
+                final Gson gson = new Gson();
+                Type type = new TypeToken<String>(){}.getType();
+                final String[] json = {sharedPref.getString("email", "Email")};
+                String userEmail = gson.fromJson(json[0],type);
+                final String tempEmail = userEmail.replace('.', '_');
+
+                DatabaseReference tempRef= FirebaseDatabase.getInstance().getReference().child("users").child(tempEmail);
+                tempRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
+                        for (final DataSnapshot ds : dataSnapshot.getChildren()) {
+                            String Values = ds.getKey();
+                            assert Values != null;
+                            if ("Name".equalsIgnoreCase(Values)) {
+                                temp = ds.getValue().toString();
+                                Log.i("INFO_1","Name:"+ temp);
+
+                                json[0] = gson.toJson(temp);
+                                sharedPref.edit().putString("name", json[0]).apply();
+                            } else if ("RegNo".equalsIgnoreCase(Values)) {
+                                temp = ds.getValue().toString();
+                                Log.i("INFO_1","RegNo:"+ temp);
+
+                                json[0] = gson.toJson(temp);
+                                sharedPref.edit().putString("regNo", temp).apply();
+                            }
+                            else if ("Count".equalsIgnoreCase(Values)) {
+                                temp = ds.getValue().toString();
+                                Log.i("INFO_1","Count:"+ temp);
+
+                                json[0] = gson.toJson(temp);
+                                sharedPref.edit().putInt("count",Integer.parseInt(temp)).apply();
+                            }
+                            else if("Upload".equalsIgnoreCase(Values)){
+                                temp = ds.getValue().toString();
+                                Log.i("INFO_1","Upload:"+ temp);
+
+                                json[0] = gson.toJson(temp);
+                                sharedPref.edit().putInt("uploadCheck",Integer.parseInt(temp)).apply();
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+                Intent intent=new Intent(LoginActivity.this,NavigationActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+            }
             Intent intent = new Intent(LoginActivity.this, NavigationActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
