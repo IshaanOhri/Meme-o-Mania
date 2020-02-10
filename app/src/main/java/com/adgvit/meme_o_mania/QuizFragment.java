@@ -48,10 +48,12 @@ public class QuizFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final int sNo = new Random().nextInt(4) + 1;
+        Random random = new Random(System.currentTimeMillis());
+
+        int sNo = random.nextInt(5) + 1;
 
         final Button startQuizButton  = view.findViewById(R.id.startQuizButton);
-        final DatabaseReference dataBase = FirebaseDatabase.getInstance().getReference("questions").child(Integer.toString(1));
+        final DatabaseReference dataBase = FirebaseDatabase.getInstance().getReference("questions").child(Integer.toString(sNo));
         final AVLoadingIndicatorView progressRing = view.findViewById(R.id.progressRing);
 
         SharedPreferences sharedPref = this.getActivity().getSharedPreferences("com.adgvit.meme_o_mania", Context.MODE_PRIVATE);

@@ -35,15 +35,26 @@ public class ResultFragment extends Fragment {
         TextView scoreTextView = view.findViewById(R.id.scoreTextView);
         Button continueButton = view.findViewById(R.id.continueButton);
         ImageView congratsImageView = view.findViewById(R.id.congratsImageView);
-
-        Glide.with(getContext())
-                .load(R.drawable.congrats)
-                .into(congratsImageView);
+        TextView congTextView = view.findViewById(R.id.congTextView);
 
         int s = ((Quiz)this.getActivity()).getScore();
 
         String score = s + "/10" + " Score";
         scoreTextView.setText(score);
+
+        if(((Quiz)this.getActivity()).getCheat())
+        {
+            Glide.with(getContext())
+                    .load(R.drawable.tenor)
+                    .into(congratsImageView);
+
+            congTextView.setText("Oops! you were caught cheating.");
+        }else
+        {
+            Glide.with(getContext())
+                    .load(R.drawable.congrats)
+                    .into(congratsImageView);
+        }
 
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -69,6 +69,9 @@
     <string name="logout">Logout</string>
     <string name="privacyPolicy">Privacy Policy</string>
     <string name="contactUs">Contact Us</string>
+    <string name="contactInfo">Email ID \nappledevelopersgroup@gmail.com\n\nSarvesh Bhibhuti\n+91-9099946404</string>
+    <string name="call">Call Us Now</string>
+    <string name="back">Go Back</string>
 
     <!--Meme Upload-->
     <string name="uploadRulesButton">Upload Meme</string>
@@ -78,7 +81,7 @@
     <string name="ok">Okay</string>
     <string name="noQuiz">Not Allowed\nAttempt quiz first</string>
     <string name="success">Your meme has been successfully uploaded!</string>
-    <string name="uploadRules">Memes Uploading Rules\n1. Defaming VIT, profanity, instigating people will not be allowed. If found you will be disqualified.\n2. Memes using provided templates will only be allowed.</string>
+    <string name="uploadRules">Memes Uploading Rules:\n1. Defaming VIT, profanity, instigating people will not be allowed. If found you will be disqualified.\n2. Memes using provided templates will only be allowed.</string>
 
     <!--Confirm Sign Up-->
     <string name="confirm">Congratulations!\nYour account is verified.</string>
@@ -94,7 +97,7 @@
     <string name="option3">A Youtube Video</string>
     <string name="option4">Twitter Post</string>
     <string name="arules">Rules</string>
-    <string name="rulesQuiz">Quiz Rules:\n1. Only single attempt allowed.\n2. Clear the preset cutoff to qualify to the next round.\n3. No means of cheating will be allowed during the quiz or while performing the tasks.\n4. Do not close the app once the quiz has begun.\n\n\n</string>
+    <string name="rulesQuiz">Quiz Rules:\n1. Only single attempt allowed.\n2. Clear the preset cutoff to qualify to the next round.\n3. No means of cheating will be allowed during the quiz or while performing the tasks.\n4. Do not close the app/screen once the quiz has begun, if done so quiz will automatically be submitted.\n\n\n</string>
 
 
 </resources>

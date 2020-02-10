@@ -41,6 +41,7 @@ public class Quiz extends AppCompatActivity {
     private StorageReference storage,storageRef;
     private ArrayList<questionObject> questionsList = new ArrayList<>();
     private AVLoadingIndicatorView avi;
+    private boolean cheat = false;
 
 
     void setCountDownTimer()
@@ -82,18 +83,27 @@ public class Quiz extends AppCompatActivity {
     void loadNewQuestion(int questionNo){
 
         hideUi();
+        final int q_no = questionNo;
 
         if(questionsList.get(questionNo).getImg().equals("null") )
         {
-            memeImageView.setVisibility(View.GONE);
-            setCountDownTimer();
-            reset();
-            setNewQuestion(questionNo);
-            showUi();
+            Handler handler = new Handler();
+
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    setCountDownTimer();
+                    reset();
+                    setNewQuestion(q_no);
+                    showUi2();
+                }
+            }, 500);
+
+
 
         }else {
 
-            getMeme(questionsList.get(questionNo).getImg());
+            getMeme(questionsList.get(q_no).getImg());
 
         }
 
@@ -207,6 +217,7 @@ public class Quiz extends AppCompatActivity {
 
     void cheating()
     {
+        cheat = true;
 
         DatabaseReference myref2 = FirebaseDatabase.getInstance().getReference().child("marks").child(NavigationActivity.email.replace('.','_'));
 
@@ -215,6 +226,9 @@ public class Quiz extends AppCompatActivity {
         hideUi();
 
         avi.smoothToHide();
+
+        countDownTimer.cancel();
+        questionNo = 10;
 
         Fragment fragment = new ResultFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.resultFrameLayout,fragment).commit();
@@ -257,9 +271,32 @@ public class Quiz extends AppCompatActivity {
         cl4.setEnabled(true);
         avi.smoothToHide();
     }
+    void showUi2()
+    {
+        heading.setVisibility(View.VISIBLE);
+        timeTextView.setVisibility(View.VISIBLE);
+        unit.setVisibility(View.VISIBLE);
+        memeImageView.setVisibility(View.GONE);
+        questionNumberTextView.setVisibility(View.VISIBLE);
+        questionTextView.setVisibility(View.VISIBLE);
+        c1.setVisibility(View.VISIBLE);
+        c2.setVisibility(View.VISIBLE);
+        c3.setVisibility(View.VISIBLE);
+        c4.setVisibility(View.VISIBLE);
+        cl1.setEnabled(true);
+        cl2.setEnabled(true);
+        cl3.setEnabled(true);
+        cl4.setEnabled(true);
+        avi.smoothToHide();
+    }
     public int getScore()
     {
         return score;
+    }
+
+    public boolean getCheat()
+    {
+        return cheat;
     }
 
     @Override

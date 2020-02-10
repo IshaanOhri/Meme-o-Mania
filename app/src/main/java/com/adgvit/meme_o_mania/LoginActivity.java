@@ -163,7 +163,6 @@ public class LoginActivity extends AppCompatActivity {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-
                                                     for (final DataSnapshot ds : dataSnapshot.getChildren()) {
                                                         String Values = ds.getKey();
                                                         assert Values != null;
@@ -195,7 +194,6 @@ public class LoginActivity extends AppCompatActivity {
                                                             sharedPref.edit().putInt("uploadCheck",Integer.parseInt(temp)).apply();
                                                         }
                                                     }
-
                                                 }
 
                                                 @Override
